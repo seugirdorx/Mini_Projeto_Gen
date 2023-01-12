@@ -1,0 +1,46 @@
+.nav {
+    position: absolute;
+    color: white;
+    width: 100vw; height: 20vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 1px;
+    z-index: 3;
+    position: fixed;
+    background: linear-gradient(black, rgba(0,0,0,0));
+    text-shadow: 1px 1px 5px black;
+}
+.nav .logo {
+    margin-left: 10%;
+}
+.nav .logo img {
+    width: 100px;
+}
+.nav ul {
+    width: 60%;
+    display: flex;
+    justify-content: right;
+    margin: 0;
+}
+.nav ul li {
+    list-style: none;
+    margin: 0px 15px 0px 15px;
+}
+.line {
+    width: 1px; height: 50%;
+    background-color: white;
+}
+.socialArea {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 10% 0 0;
+}
+.socialArea img {
+    width: 20px; height: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
