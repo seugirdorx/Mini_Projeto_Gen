@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, ILike, DeleteResult } from "typeorm";
-import { GrupoPi } from "../entities/GrupoPi.entity";
+import { GrupoPi } from "../entities/grupoPi.entity";
+
 
 @Injectable()
 export class GrupoPiService {
@@ -9,7 +10,12 @@ export class GrupoPiService {
 
     async findAll(): Promise<GrupoPi[]> {
         return await this.grupoPiRepository.find({
+            relations: {
+                turma: true,
+                projeto: true
+            }
         })
+           
     }
 
     async findById(id: number): Promise<GrupoPi> {
@@ -17,10 +23,14 @@ export class GrupoPiService {
             where: {
                 id
             },
+            relations: {
+                turma: true,
+                projeto: true
+            }
         })
 
         if(!grupoPi)
-            throw new HttpException('Grupo não encontrada', HttpStatus.NOT_FOUND)
+            throw new HttpException('Grupo não encontrado', HttpStatus.NOT_FOUND)
 
         return grupoPi
     }
@@ -43,7 +53,7 @@ export class GrupoPiService {
         let buscarGrupoPi = await this.findById(id)
 
         if(!buscarGrupoPi)
-            throw new HttpException('Grupo não encontrada', HttpStatus.NOT_FOUND)
+            throw new HttpException('Grupo não encontrado', HttpStatus.NOT_FOUND)
 
         return await this.grupoPiRepository.delete(id)
     }

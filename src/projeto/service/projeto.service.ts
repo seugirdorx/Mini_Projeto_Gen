@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, ILike, DeleteResult } from "typeorm";
-import { Projeto } from "../entities/Projeto.entity";
+import { Projeto } from "../entities/projeto.entity";
+
 
 @Injectable()
 export class ProjetoService {
@@ -9,6 +10,10 @@ export class ProjetoService {
 
     async findAll(): Promise<Projeto[]> {
         return await this.projetoRepository.find({
+            relations: {
+                grupoPi: true,
+                turma: true
+            }
         })
     }
 
@@ -17,21 +22,23 @@ export class ProjetoService {
             where: {
                 id
             },
+            relations: {
+                grupoPi: true,
+        
+            }
         })
 
         if(!projeto)
-            throw new HttpException('Projeto não encontrada', HttpStatus.NOT_FOUND)
+            throw new HttpException('Projeto não encontrado', HttpStatus.NOT_FOUND)
 
         return projeto
     }
 
-    async findByNome(nomeProjeto: string): Promise<Projeto[]> {
-        return await this.projetoRepository.find({
-            where: {
-                nomeProjeto: ILike(`%${nomeProjeto}%`)
-            }
-        })
-    }
+
+
+
+
+    
 
 
     async create(projeto: Projeto): Promise<Projeto> {
@@ -51,7 +58,7 @@ export class ProjetoService {
         let buscarProjeto = await this.findById(id)
 
         if(!buscarProjeto)
-            throw new HttpException('Projeto não encontrada', HttpStatus.NOT_FOUND)
+            throw new HttpException('Projeto não encontrado', HttpStatus.NOT_FOUND)
 
         return await this.projetoRepository.delete(id)
     }

@@ -11,4 +11,4 @@ import { TurmaService } from "./service/turma.service";
     exports: [TypeOrmModule]
 })
 
-export class PostagemModule {}
+export class TurmaModule {}

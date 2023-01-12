@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common"
 import { GrupoPi } from "../entities/grupoPi.entity"
 import { GrupoPiService } from "../service/grupoPi.service"
+import { ApiTags } from "@nestjs/swagger"
 
 
-
+@ApiTags('Grupos')
 @Controller('/grupos')
 export class GrupoPiController {
     constructor(private readonly grupoPiService: GrupoPiService) {}

@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common"
 import { Turma} from "../entities/turma.entity"
 import { TurmaService} from "../service/turma.service"
+import { ApiTags } from "@nestjs/swagger"
 
 
-
+@ApiTags('Turmas')
 @Controller('/turmas')
 export class TurmaController {
     constructor(private readonly turmaService: TurmaService) {}

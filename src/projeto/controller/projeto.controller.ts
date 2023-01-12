@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common"
-import { Projeto } from "../entities/Projeto.entity"
-import { ProjetoService} from "../service/Projeto.service"
+import { ApiTags } from "@nestjs/swagger"
+import { Projeto } from "../entities/projeto.entity"
+import { ProjetoService } from "../service/projeto.service"
 
 
-
+@ApiTags('Projetos')
 @Controller('/projetos')
 export class ProjetoController {
     constructor(private readonly projetoService: ProjetoService) {}
@@ -20,11 +21,6 @@ export class ProjetoController {
         return this.projetoService.findById(id)
     }
 
-    @Get ('/:nome')
-    @HttpCode(HttpStatus.OK)
-    findByNome(@Param('nomeGrupo') nomeGrupo: string ): Promise<Projeto[]> {
-        return this.projetoService.findByNome(nomeGrupo)
-    }
 
     @Post ()
     @HttpCode(HttpStatus.CREATED)
